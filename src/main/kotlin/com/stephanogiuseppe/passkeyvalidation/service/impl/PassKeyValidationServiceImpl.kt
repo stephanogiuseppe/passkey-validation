@@ -15,7 +15,7 @@ class PassKeyValidationServiceImpl: PassKeyService {
         if (!hasAtLeastOneChar(passKey.encryptedPass))
             throw PassKeyException(PassKeyMessageCustomError.ONE_LETTER.message)
 
-        if (!hasWhitespace(passKey.encryptedPass))
+        if (hasWhitespace(passKey.encryptedPass))
             throw PassKeyException(PassKeyMessageCustomError.WHITESPACE.message)
 
         if (!hasAtLeastOneLowercaseLetter(passKey.encryptedPass))
