@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 class ValidationController {
 
     @PostMapping("passkey")
-    fun isValid(@RequestBody passKey: PassKeyRequest): ResponseEntity<PassKeyResponse> {
-        return ResponseEntity(PassKeyResponse(true), HttpStatus.OK)
-    }
+    fun isValid(@RequestBody passKey: PassKeyRequest): ResponseEntity<PassKeyResponse> =
+        ResponseEntity(PassKeyResponse(true), HttpStatus.OK)
 
 }
