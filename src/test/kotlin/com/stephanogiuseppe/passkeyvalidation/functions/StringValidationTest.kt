@@ -8,18 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest
 class StringValidationTest {
 
     @Test
-    fun `Should return true when hasAtLeastOneChar is called with at least one character`() {
-        Assertions.assertEquals(true, hasAtLeastOneChar("t"))
-        Assertions.assertEquals(true, hasAtLeastOneChar("test"))
-        Assertions.assertEquals(true, hasAtLeastOneChar("!@#"))
-    }
-
-    @Test
-    fun `Should return false when hasAtLeastOneChar is called without a character`() {
-        Assertions.assertEquals(false, hasAtLeastOneChar(""))
-    }
-
-    @Test
     fun `Should return true when hasWhitespace is called with whitespace`() {
         Assertions.assertEquals(true, hasWhitespace("te t"))
         Assertions.assertEquals(true, hasWhitespace("tes "))
@@ -29,16 +17,14 @@ class StringValidationTest {
     @Test
     fun `Should return false when hasWhitespace is called without whitespace`() {
         Assertions.assertEquals(false, hasWhitespace("test"))
-        Assertions.assertEquals(true, hasAtLeastOneChar("test"))
-        Assertions.assertEquals(true, hasAtLeastOneChar("!@#"))
     }
 
     @Test
     fun `Should return true when hasAtLeastOneLowercaseLetter is called with a lowercase`() {
         Assertions.assertEquals(true, hasAtLeastOneLowercaseLetter("t"))
         Assertions.assertEquals(true, hasAtLeastOneLowercaseLetter("test"))
-        Assertions.assertEquals(true, hasAtLeastOneChar("!@#t"))
-        Assertions.assertEquals(true, hasAtLeastOneChar("t!@#"))
+        Assertions.assertEquals(true, hasAtLeastOneLowercaseLetter("!@#t"))
+        Assertions.assertEquals(true, hasAtLeastOneLowercaseLetter("t!@#"))
     }
 
     @Test
@@ -51,17 +37,18 @@ class StringValidationTest {
 
     @Test
     fun `Should return true when hasAtLeastOneCapitalLetter is called with a capital letter`() {
+        Assertions.assertEquals(true, hasAtLeastOneCapitalLetter("T"))
         Assertions.assertEquals(true, hasAtLeastOneCapitalLetter("TEST"))
-        Assertions.assertEquals(false, hasAtLeastOneLowercaseLetter("!@#T"))
-        Assertions.assertEquals(false, hasAtLeastOneLowercaseLetter("T!@#"))
+        Assertions.assertEquals(true, hasAtLeastOneCapitalLetter("!@#T"))
+        Assertions.assertEquals(true, hasAtLeastOneCapitalLetter("T!@#"))
     }
 
     @Test
     fun `Should return false when hasAtLeastOneCapitalLetter is called without a capital letter`() {
         Assertions.assertEquals(true, hasAtLeastOneLowercaseLetter("t"))
         Assertions.assertEquals(true, hasAtLeastOneLowercaseLetter("test"))
-        Assertions.assertEquals(true, hasAtLeastOneChar("!@#t"))
-        Assertions.assertEquals(true, hasAtLeastOneChar("t!@#"))
+        Assertions.assertEquals(true, hasAtLeastOneLowercaseLetter("!@#t"))
+        Assertions.assertEquals(true, hasAtLeastOneLowercaseLetter("t!@#"))
     }
 
     @Test
@@ -75,8 +62,23 @@ class StringValidationTest {
     @Test
     fun `Should return false when hasDuplicatedLetters is called without a capital letter`() {
         Assertions.assertEquals(false, hasDuplicatedLetters("tes"))
-        Assertions.assertEquals(false, hasDuplicatedLetters("Tes"))
+        Assertions.assertEquals(false, hasDuplicatedLetters("TEStes"))
         Assertions.assertEquals(false, hasDuplicatedLetters("TES!@#"))
+    }
+
+    @Test
+    fun `Should return true when hasAtLeastOneSpecialChar is called with a special char`() {
+        Assertions.assertEquals(true, hasAtLeastOneSpecialChar("!"))
+        Assertions.assertEquals(true, hasAtLeastOneSpecialChar("T!T"))
+        Assertions.assertEquals(true, hasAtLeastOneSpecialChar("TE!"))
+        Assertions.assertEquals(true, hasAtLeastOneSpecialChar("T@T@"))
+    }
+
+    @Test
+    fun `Should return false when hasAtLeastOneSpecialChar is called without a special char`() {
+        Assertions.assertEquals(false, hasAtLeastOneSpecialChar("tes"))
+        Assertions.assertEquals(false, hasAtLeastOneSpecialChar("TES"))
+        Assertions.assertEquals(false, hasAtLeastOneSpecialChar("Test"))
     }
 
 }

@@ -18,7 +18,7 @@ class ValidationControllerTests(
 
     @Test
     fun `Assert application return content and status code 200`() {
-        val entity = restTemplate.postForEntity("/validation/passkey", PassKeyRequest("Pas!@#"), PassKeyResponse::class.java)
+        val entity = restTemplate.postForEntity("/validation/passkey", PassKeyRequest("Pasw!@#te"), PassKeyResponse::class.java)
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
         Assertions.assertThat(entity.body).isEqualTo(PassKeyResponse(true))
     }
