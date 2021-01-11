@@ -1,5 +1,7 @@
 package com.stephanogiuseppe.passkeyvalidation.controller
 
+import com.stephanogiuseppe.passkeyvalidation.dto.PassKeyRequest
+import com.stephanogiuseppe.passkeyvalidation.dto.PassKeyResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -12,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController
 class ValidationController {
 
     @PostMapping("passkey")
-    fun isValid(@RequestBody passKey: String): ResponseEntity<String> {
-        return ResponseEntity("Its ok: ${passKey}", HttpStatus.OK)
+    fun isValid(@RequestBody passKey: PassKeyRequest): ResponseEntity<PassKeyResponse> {
+        return ResponseEntity(PassKeyResponse(true), HttpStatus.OK)
     }
 
 }

@@ -1,5 +1,7 @@
 package com.stephanogiuseppe.passkeyvalidation.controller
 
+import com.stephanogiuseppe.passkeyvalidation.dto.PassKeyRequest
+import com.stephanogiuseppe.passkeyvalidation.dto.PassKeyResponse
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,9 +14,9 @@ class ValidationControllerTests(@Autowired val restTemplate: TestRestTemplate) {
 
     @Test
     fun `Assert application return content and status code 200`() {
-        val entity = restTemplate.postForEntity("/validation/passkey", "true", String::class.java)
+        val entity = restTemplate.postForEntity("/validation/passkey", PassKeyRequest("passKeyEnc"), PassKeyResponse::class.java)
         Assertions.assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
-        Assertions.assertThat(entity.body).contains("Its ok: true")
+        Assertions.assertThat(entity.body).isEqualTo(PassKeyResponse(true))
     }
 
 }
